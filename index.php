@@ -23,7 +23,8 @@
     if ($conn->connect_error) {
         die("Błąd połączenia z bazą danych: " . $conn->connect_error);
     }
-
+    // Pobierz aktualną datę i godzinę
+    $currentDateTime = date("Y-m-d H:i:s");
     // Sprawdzenie czy użytkownik jest zalogowany
     if (!isset($_SESSION['rcp'])) {
         header("Location: logowanie.php"); // Przekierowanie do strony logowania
@@ -36,12 +37,12 @@
         $numer = $_POST['numer'];
 
         // Sprawdzenie, czy numer jest poprawny (1, 2, 3, 4)
-        if ($numer >= 1 && $numer <= 4) {
-            // Tutaj można dodać kod zapisujący zgłoszenie rozpoczęcia pracy do bazy danych
-            // Przykładowe zapytanie SQL:
-            $sql = "INSERT INTO zgloszenia (date, rcp, numer) VALUES ('$rcp', '$numer', '$date')";
+        if ($numer >= 1 && $numer <= 4) 
+        //Przesłanie zgłoszenia do bazy
+        {
+            $sql = "INSERT INTO zgloszenia (currentDateTime, rcp, numer) VALUES ('$currentDateTime', '$rcp', '$numer')";
             if ($conn->query($sql) === TRUE) {
-                echo "Rozpoczęto pracę: Numer $numer" "Data i godzina rozpoczęcia: $date";
+                echo "Rozpoczęto pracę: Numer $numer Data i godzina rozpoczęcia: $currentDateTime";
             } else {
                 echo "Błąd: " . $sql . "<br>" . $conn->error;
             }
@@ -56,14 +57,11 @@
     $sql = "SELECT * FROM pracownicy WHERE RCP = '$rcp'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
-    
-    //data zgłoszenia
-    
 
+    
     // Wyświetl formularz
     echo "<div class='container'>";
     echo "<p>Witaj, " . $row['imie'] . " " . $row['nazwisko'] . "!</p>";
-    echo "Rozpocząłeś pracę" ;
     echo "<form method='post'>";
     echo "<label for='numer'>Wybierz numer:</label>";
     echo "<select id='numer' name='numer'>";
