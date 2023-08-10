@@ -1,4 +1,26 @@
-<?php
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Logowanie</title>
+  <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <h1>Logowanie</h1>
+
+    <form method="post">
+        <label for="rcp">RCP:</label>
+        <input type="text" id="rcp" name="rcp" required><br>
+
+        <label for="pass">Hasło:</label>
+        <input type="password" id="pass" name="pass" required><br>
+
+        <input type="submit" value="Zaloguj">
+    </form>
+
+    <?php
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -32,25 +54,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 ?>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Logowanie</title>
-  <link rel="stylesheet" href="styl.css">
-</head>
-<body>
-    <h1>Logowanie</h1>
-
-    <form method="post">
-        <label for="rcp">RCP:</label>
-        <input type="text" id="rcp" name="rcp" required><br>
-
-        <label for="pass">Hasło:</label>
-        <input type="password" id="pass" name="pass" required><br>
-
-        <input type="submit" value="Zaloguj">
-    </form>
 </body>
 </html>
