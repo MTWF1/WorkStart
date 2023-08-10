@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $rcp = $_POST["rcp"];
     $pass = $_POST["pass"];
 
-    // Dane bazy danych (jak wcześniej)
+    // Dane bazy danych 
     $host = "localhost";
     $username = "root";
     $password = "";
